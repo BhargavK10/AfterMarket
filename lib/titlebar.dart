@@ -6,7 +6,7 @@ PreferredSizeWidget titleBar(String title){
     title: Center(
       child: Image.asset(
         'assets/images/FullLogoWhite.png',
-        height: 100,
+        height: 200,
       ),
     )
   );
