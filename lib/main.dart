@@ -1,4 +1,7 @@
 import 'package:aftermarket/homepage.dart';
+import 'package:aftermarket/performanceproducts.dart';
+import 'package:aftermarket/login.dart';
+import 'package:aftermarket/product.dart';
 import 'package:flutter/material.dart';
 
 void main() {
