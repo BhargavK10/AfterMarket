@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
               ]
             ),
             Padding(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.only(left: 20, right: 10),
               child: Row(
                 children: [
                   Column(
@@ -110,22 +110,23 @@ class _HomePageState extends State<HomePage> {
                           color: Color(0xFF2C3137),
                           borderRadius: BorderRadius.circular(10)
                         ),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'assets/images/icons/performance.png',
-                              height: 80,
-                            ),
-                            Text(
-                              'Performace',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Rajdhani',
-                                fontSize: 18
-                              ),
-                            )
-                          ],
-                        ),
+                        child: Padding(
+                          padding: EdgeInsetsGeometry.all(10),
+                          child: Row(
+                            children: [
+                              Icon(Icons.build, color: Colors.white,),
+                              SizedBox(width: 10,),
+                              Text(
+                                'Performace',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Rajdhani',
+                                  fontSize: 18
+                                ),
+                              )
+                            ],
+                          ),
+                        )
                       ),
                       SizedBox(height: 10,),
                       Container(
@@ -134,23 +135,24 @@ class _HomePageState extends State<HomePage> {
                           color: Color(0xFF2C3137),
                           borderRadius: BorderRadius.circular(10)
                         ),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'assets/images/icons/asthetic.png',
-                              height: 80,
-                            ),
-                            Text(
-                              'Asthetic',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Rajdhani',
-                                fontSize: 18
-                              ),
-                            )
-                          ],
-                        ),
-                      )
+                        child: Padding(
+                          padding: EdgeInsetsGeometry.all(10),
+                          child: Row(
+                            children: [
+                              Icon(Icons.shopping_bag, color: Colors.white,),
+                              SizedBox(width: 10,),
+                              Text(
+                                'OEM Parts',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Rajdhani',
+                                  fontSize: 18
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ),
                     ],
                   ),
                   SizedBox(width: 10,),
@@ -162,22 +164,23 @@ class _HomePageState extends State<HomePage> {
                           color: Color(0xFF2C3137),
                           borderRadius: BorderRadius.circular(10)
                         ),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'assets/images/icons/OEM.png',
-                              height: 80,
-                            ),
-                            Text(
-                              'OEM',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Rajdhani',
-                                fontSize: 18
-                              ),
-                            )
-                          ],
-                        ),
+                        child: Padding(
+                          padding: EdgeInsetsGeometry.all(10),
+                          child: Row(
+                            children: [
+                              Icon(Icons.auto_awesome, color: Colors.white,),
+                              SizedBox(width: 10,),
+                              Text(
+                                'Asthetic',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Rajdhani',
+                                  fontSize: 18
+                                ),
+                              )
+                            ],
+                          ),
+                        )
                       ),
                       SizedBox(height: 10,),
                       Container(
@@ -186,23 +189,24 @@ class _HomePageState extends State<HomePage> {
                           color: Color(0xFF2C3137),
                           borderRadius: BorderRadius.circular(10)
                         ),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'assets/images/icons/bodykit.png',
-                              height: 80,
-                            ),
-                            Text(
-                              'Body Kits',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Rajdhani',
-                                fontSize: 18
-                              ),
-                            )
-                          ],
-                        ),
-                      )
+                        child: Padding(
+                          padding: EdgeInsetsGeometry.all(10),
+                          child: Row(
+                            children: [
+                              Icon(Icons.car_repair, color: Colors.white,),
+                              SizedBox(width: 10,),
+                              Text(
+                                'Body Kits',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Rajdhani',
+                                  fontSize: 18
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ),
                     ],
                   )
                 ],
