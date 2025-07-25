@@ -72,6 +72,8 @@
 //   }
 // }
 
+import 'package:aftermarket/providers/product_provider.dart';
+import 'package:aftermarket/screens/description_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/product.dart';
@@ -80,9 +82,9 @@ import 'cart_page.dart';
 
 class ProductPage extends StatelessWidget {
   final List<Product> products =[
-   Product(name: "911", price: 600.90, image: 'assets/images/911.jpg'),
-   Product(name: "718", price: 99.99, image: 'assets/images/porsche718.jpg'),
-   Product(name: "Taycan", price: 39.99, image: 'assets/images/taycan.jpg')
+   Product(name: "911", price: 600.90, image: 'assets/images/logos/Logo_max.png', id: '1234', description: "usajnfoiafjdonfkoflksdflkdslkfdslkfd"),
+   Product(name: "718", price: 99.99, image: 'assets/images/logos/Logo_mini.png', id: '1235', description: "usajnfoiafjdonfkoflksdflkdslkfdslkfd"),
+   Product(name: "Taycan", price: 39.99, image: 'assets/images/logos/Logo_mini2.png', id: '1236', description: "usajnfoiafjdonfkoflksdflkdslkfdslkfd")
   ];
 
   @override
@@ -124,24 +126,30 @@ class ProductPage extends StatelessWidget {
       ),
       body: ListView.builder(
         itemCount: products.length,
-        itemBuilder: (_, index) {
+        itemBuilder: (cntext, index) {
           final product = products[index];
           return Card(
               child: ListTile(
                 leading: Image.asset(product.image),
                 title: Text(product.name),
                 subtitle: Text("\$${product.price.toStringAsFixed(2)}"),
+                onTap: () {
+                  context.read<ProductProvider>().selectProduct(product);
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context)=> const DescriptionPage(),
+                  ));
+                },
                 trailing: ElevatedButton(
                   onPressed: (){
                     cart.addToCart(product);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("${product.name} added to your cart")));
+                      SnackBar(content: Text("${product.name} added to your cart"))
+                    );
                   },
                    child: Text("Add To Cart")
                 ),
               ),
           );
-          
         },
       ),
     );

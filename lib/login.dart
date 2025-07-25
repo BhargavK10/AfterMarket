@@ -1,3 +1,4 @@
+import 'package:aftermarket/homepage.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -14,14 +15,14 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'Aftermarket Login',
+                'Login to',
                 style: TextStyle(
                   color: Color.fromARGB(255, 0, 0, 0),
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.5,
+                  fontSize: 20,
+                  // letterSpacing: 1.5,
                 ),
               ),
+              Image.asset('assets/images/logos/FullLogoBlackWide.png'),
               const SizedBox(height: 40),
               _buildTextField(
                 label: 'Email',
@@ -42,11 +43,14 @@ class LoginPage extends StatelessWidget {
                     backgroundColor: const Color(0xFFDB3939),
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  onPressed: () {
-                    // Handle login logic
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    );
                   },
                   child: const Text(
                     'LOGIN',
@@ -84,18 +88,18 @@ class LoginPage extends StatelessWidget {
       style: const TextStyle(color: Colors.white),
       cursorColor: const Color(0xFFDB3939),
       decoration: InputDecoration(
-        labelText: label,
-        labelStyle: const TextStyle(color: Colors.white70),
+        hintText: label,
+        hintStyle: const TextStyle(color: Colors.white70),
         prefixIcon: Icon(icon, color: const Color(0xFFDB3939)),
         filled: true,
-        fillColor: const Color(0xFF1E1E1E),
+        fillColor: const Color(0xFF2C3137),
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Color(0xFFDB3939)),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(10),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.grey),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(10),
         ),
       ),
     );
