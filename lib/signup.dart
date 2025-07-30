@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:aftermarket/signup.dart';
+import 'package:aftermarket/login.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignupPage> createState() => _SignupPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignupPageState extends State<SignupPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool isLoading = false;
@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
     ));
   }
 
-  Future signIn() async{
+  Future signUp() async{
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
     if(email.isEmpty || password.isEmpty){
@@ -30,12 +30,14 @@ class _LoginPageState extends State<LoginPage> {
     }
     setState(() => isLoading = true);
     try {
-      await Supabase.instance.client.auth.signInWithPassword(
+      await Supabase.instance.client.auth.signUp(
         email: email,
         password: password
       );
+      showMessage('Account has been created! proceed to sign in');
+      Navigator.pop(context);
     } catch (e) {
-      showMessage('Login failed ${e.toString()}');
+      showMessage('SIgnup failed ${e.toString()}');
     }finally{
       setState(() => isLoading = false);
     }
@@ -52,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'Login to',
+                'Sign up for',
                 style: TextStyle(
                   color: Color.fromARGB(255, 0, 0, 0),
                   fontSize: 20,
@@ -86,10 +88,10 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   onPressed: (){
-                    isLoading? null:signIn();
+                    isLoading? null:signUp();
                   },
                   child: isLoading? const CircularProgressIndicator(): const Text(
-                    'LOGIN',
+                    'SIGN UP',
                     style: TextStyle(
                       color: Colors.white,
                       letterSpacing: 1.2,
@@ -103,19 +105,11 @@ class _LoginPageState extends State<LoginPage> {
               TextButton(
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(
-                    builder: (_)=> const SignupPage()
+                    builder: (_)=> const LoginPage()
                   ));
                 },
                 child: const Text(
-                  'Dont have an account? signup here',
-                  style: TextStyle(color: Colors.grey),
-                ),
-              ),
-              const SizedBox(height: 16),
-              TextButton(
-                onPressed: () {},
-                child: const Text(
-                  'Forgot Password?',
+                  'already have an account? Login here',
                   style: TextStyle(color: Colors.grey),
                 ),
               ),

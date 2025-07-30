@@ -3,7 +3,6 @@ import 'package:aftermarket/performanceproducts.dart';
 import 'package:aftermarket/titlebar.dart';
 import 'package:aftermarket/toppicksslider.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter/services.dart';
 
 class HomePage extends StatefulWidget {
@@ -41,7 +40,7 @@ class _HomePageState extends State<HomePage> {
 
   SizedBox categoryButton(Icon buttonIcon, String buttonText, Widget toPage){
     return SizedBox(
-      width: 180,
+      width: MediaQuery.of(context).size.width * 0.47,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: Color(0xFF2C3137),
@@ -117,6 +116,7 @@ class _HomePageState extends State<HomePage> {
         drawer: DrawerMenu(),
         body: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               //search v
               Container(
@@ -169,7 +169,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(left: 20, right: 10),
+                padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.02),
                 child: Row(
                   children: [
                     Column(
@@ -179,7 +179,7 @@ class _HomePageState extends State<HomePage> {
                         categoryButton(Icon(Icons.shopping_bag, color: Colors.white,), 'OEM', PerformanceProducts()),
                       ],
                     ),
-                    SizedBox(width: 10),
+                    SizedBox(width: MediaQuery.of(context).size.width * 0.02),
                     Column(
                       children: [
                         categoryButton(Icon(Icons.auto_awesome, color: Colors.white,), 'Asthetic', PerformanceProducts()),

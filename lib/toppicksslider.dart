@@ -34,14 +34,14 @@ class TopPicksSlider extends StatelessWidget {
           children: [
             SizedBox(
               height: 200,
-              width: 320,
+              width: MediaQuery.of(context).size.width * 0.8,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.asset(item['img']!, fit: BoxFit.fill, height: 200,),
+                child: Image.asset(item['img']!, fit: BoxFit.cover,),
               ),
             ),
             Container(
-              width: 1000,
+              width: MediaQuery.of(context).size.width * 0.8,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.black.withAlpha(127)
