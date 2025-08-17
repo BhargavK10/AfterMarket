@@ -1,5 +1,6 @@
 import 'package:aftermarket/drawermenu.dart';
 import 'package:aftermarket/performanceproducts.dart';
+import 'package:aftermarket/screens/product_page.dart';
 import 'package:aftermarket/titlebar.dart';
 import 'package:aftermarket/toppicksslider.dart';
 import 'package:flutter/material.dart';
@@ -182,7 +183,7 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(width: MediaQuery.of(context).size.width * 0.02),
                     Column(
                       children: [
-                        categoryButton(Icon(Icons.auto_awesome, color: Colors.white,), 'Asthetic', PerformanceProducts()),
+                        categoryButton(Icon(Icons.auto_awesome, color: Colors.white,), 'Asthetic', ProductPage()),
                         SizedBox(height: 10),
                         categoryButton(Icon(Icons.car_repair, color: Colors.white,), 'Body Kits', PerformanceProducts()),
                       ],

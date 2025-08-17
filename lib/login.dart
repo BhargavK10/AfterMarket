@@ -60,7 +60,18 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Image.asset('assets/images/logos/FullLogoBlackWide.png'),
-              const SizedBox(height: 40),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'Use phone number instead',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                ]
+              ),
               _buildTextField(
                 cont: emailController,
                 label: 'Email',
@@ -100,24 +111,28 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               const SizedBox(height: 16),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (_)=> const SignupPage()
-                  ));
-                },
-                child: const Text(
-                  'Dont have an account? signup here',
-                  style: TextStyle(color: Colors.grey),
-                ),
-              ),
-              const SizedBox(height: 16),
-              TextButton(
-                onPressed: () {},
-                child: const Text(
-                  'Forgot Password?',
-                  style: TextStyle(color: Colors.grey),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (_)=> const SignupPage()
+                      ));
+                    },
+                    child: const Text(
+                      'Signup here',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'Forgot Password?',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

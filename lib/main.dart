@@ -1,7 +1,10 @@
+import 'package:aftermarket/providers/cart_provider.dart';
+import 'package:aftermarket/providers/product_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:aftermarket/auth/auth_gates.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:provider/provider.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized;
@@ -11,7 +14,10 @@ void main() async{
     anonKey: dotenv.env['SUPABASE_ANON_KEY']!
   );
   runApp(
-    MyApp()
+    ChangeNotifierProvider(
+      create: (_) => CartProvider(),
+      child: MyApp(),
+    )
   );
 }
 
@@ -26,9 +32,15 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: AuthGates()
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_)=> ProductProvider()),
+        ChangeNotifierProvider(create: (_)=> CartProvider())
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: AuthGates(),
+      ),
     );
   }
 }

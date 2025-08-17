@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:aftermarket/login.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+final supabase = Supabase.instance.client;
+final user = supabase.auth.currentUser!;
 
 
 class SignupPage extends StatefulWidget {
@@ -13,6 +15,8 @@ class SignupPage extends StatefulWidget {
 class _SignupPageState extends State<SignupPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final fnameController = TextEditingController();
+  final lnameController = TextEditingController();
   bool isLoading = false;
 
   void showMessage(String message){
@@ -24,6 +28,8 @@ class _SignupPageState extends State<SignupPage> {
   Future signUp() async{
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
+    final fname = fnameController.text.trim();
+    final lname = lnameController.text.trim();
     if(email.isEmpty || password.isEmpty){
       showMessage('Please fill the required fields');
       return;
@@ -34,6 +40,11 @@ class _SignupPageState extends State<SignupPage> {
         email: email,
         password: password
       );
+      await Supabase.instance.client.from('users').insert({
+          'id' : user.id,
+          'fname': fname,
+          'lname': lname,
+      });
       showMessage('Account has been created! proceed to sign in');
       Navigator.pop(context);
     } catch (e) {
@@ -63,6 +74,28 @@ class _SignupPageState extends State<SignupPage> {
               ),
               Image.asset('assets/images/logos/FullLogoBlackWide.png'),
               const SizedBox(height: 40),
+              Row(
+                children: [
+                  Expanded(
+                    child: _buildTextField(
+                      cont: fnameController,
+                      label: 'Firstname',
+                      icon: Icons.person,
+                      obscure: false,
+                    ),
+                  ),
+                  const SizedBox(width: 10), // Optional spacing
+                  Expanded(
+                    child: _buildTextField(
+                      cont: lnameController,
+                      label: 'lastname',
+                      icon: Icons.person,
+                      obscure: false,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
               _buildTextField(
                 cont: emailController,
                 label: 'Email',

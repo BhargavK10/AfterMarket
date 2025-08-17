@@ -64,8 +64,8 @@ class DrawerMenu extends StatelessWidget {
           ),
           Divider(color: Colors.grey[700]),
           ListTile(
-            leading: Icon(Icons.person, color: Color(0xFF242424)),
-            title: Text('Profile', style: TextStyle(color: Color(0xFF242424))),
+            leading: Icon(Icons.settings, color: Color(0xFF242424)),
+            title: Text('Settings', style: TextStyle(color: Color(0xFF242424))),
             onTap: () {
               Navigator.pop(context);
             },
