@@ -91,28 +91,43 @@ import 'package:provider/provider.dart';
 import '../models/product.dart';
 import '../providers/cart_provider.dart';
 import 'cart_page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class ProductPage extends StatelessWidget {
-  final List<Product> products = [
-    Product(
-        name: "911",
-        price: 600.90,
-        image: 'assets/images/logos/Logo_max.png',
-        id: '1234',
-        description: "usajnfoiafjdonfkoflksdflkdslkfdslkfd"),
-    Product(
-        name: "718",
-        price: 99.99,
-        image: 'assets/images/logos/Logo_mini.png',
-        id: '1235',
-        description: "usajnfoiafjdonfkoflksdflkdslkfdslkfd"),
-    Product(
-        name: "Taycan",
-        price: 39.99,
-        image: 'assets/images/logos/Logo_mini2.png',
-        id: '1236',
-        description: "usajnfoiafjdonfkoflksdflkdslkfdslkfd")
-  ];
+class ProductPage extends StatefulWidget {
+  final String category;
+  const ProductPage({Key? key, required this.category}) : super(key: key);
+
+  @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
+  Future<List<Product>> fetchProducts() async {
+    final response = await Supabase.instance.client
+        .from('products')
+        .select()
+        .eq('category', widget.category);
+
+    // Supabase always returns a List<dynamic>
+    final data = response as List<dynamic>;
+
+    return data.map((json) => Product.fromJson(json)).toList();
+  }
+
+  List<Product> products = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadProducts();
+  }
+
+  Future<void> loadProducts() async {
+    final fetched = await fetchProducts();
+    setState(() {
+      products = fetched;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -174,19 +189,8 @@ class ProductPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const DescriptionPage(
-                      productName: "Sporty Racing Helmet",
-                      productImages: [
-                        "https://via.placeholder.com/400x300",
-                        "https://via.placeholder.com/400x300?text=Side+View",
-                        "https://via.placeholder.com/400x300?text=Back+View",
-                      ],
-                      description: "This racing helmet is designed for maximum comfort and safety...",
-                      technicalInfo: "Material: Carbon Fiber\nWeight: 1.2kg\nSafety Rating: DOT/ECE",
-                      reviews: [
-                        "Great quality, worth the price!",
-                        "Fit is perfect and very comfortable.",
-                      ],
+                    builder: (context) => DescriptionPage(
+                      product: product,
                     ),
                   ),
                 );
@@ -197,7 +201,7 @@ class ProductPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: Image.asset(product.image, fit: BoxFit.contain),
+                      child: Image.network(product.images[0], fit: BoxFit.contain),
                     ),
                     const SizedBox(height: 8),
                     Text(

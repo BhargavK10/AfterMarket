@@ -63,23 +63,21 @@
 //   }
 // }
 
+import 'package:aftermarket/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class DescriptionPage extends StatelessWidget {
-  final String productName;
-  final List<String> productImages;
-  final String description;
-  final String technicalInfo;
-  final List<String> reviews;
+  final Product product;
+  // final String productName;
+  // final List<String> productImages;
+  // final String description;
+  // final String technicalInfo;
+  // final List<String> reviews;
 
   const DescriptionPage({
     super.key,
-    required this.productName,
-    required this.productImages,
-    required this.description,
-    required this.technicalInfo,
-    required this.reviews,
+    required this.product
   });
 
   @override
@@ -88,7 +86,7 @@ class DescriptionPage extends StatelessWidget {
       backgroundColor: const Color(0xFFEFEFEF),
       appBar: AppBar(
         title: Text(
-          productName,
+          product.name,
           style: const TextStyle(
             fontFamily: 'Rajdhani',
             fontWeight: FontWeight.bold,
@@ -108,7 +106,7 @@ class DescriptionPage extends StatelessWidget {
                 enlargeCenterPage: true,
                 enableInfiniteScroll: false,
               ),
-              items: productImages.map((imageUrl) {
+              items: product.images.map((imageUrl) {
                 return ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
@@ -174,15 +172,65 @@ class DescriptionPage extends StatelessWidget {
 
             // Description
             _sectionTitle("Description"),
-            _sectionContent(description),
+            _sectionContent(product.description),
 
             // Technical Info
+            // _sectionTitle("Technical Info"),
+            // _sectionContent(product.technicalInfo),
             _sectionTitle("Technical Info"),
-            _sectionContent(technicalInfo),
+
+            // Check if product.technicalInfo exists
+            if (product.technicalInfo.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: product.technicalInfo.entries.map<Widget>((entry) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              entry.key, // e.g. "Processor"
+                              style: const TextStyle(
+                                fontFamily: 'Rajdhani',
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 3,
+                            child: Text(
+                              entry.value.toString(), // e.g. "Intel i5"
+                              style: const TextStyle(
+                                fontFamily: 'Rajdhani',
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                ),
+              )
+            else
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Text(
+                  "No technical info available",
+                  style: TextStyle(
+                    fontFamily: 'Rajdhani',
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
 
             // Reviews
-            _sectionTitle("Reviews"),
-            ...reviews.map((review) => _reviewCard(review)).toList(),
+            // _sectionTitle("Reviews"),
+            // ...reviews.map((review) => _reviewCard(review)).toList(),
           ],
         ),
       ),
@@ -218,22 +266,22 @@ class DescriptionPage extends StatelessWidget {
     );
   }
 
-  Widget _reviewCard(String review) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-      child: Card(
-        color: const Color(0xFFD7D7D7),
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Text(
-            review,
-            style: const TextStyle(
-              color: Color.fromARGB(255, 0, 0, 0),
-              fontFamily: 'Rajdhani',
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget _reviewCard(String review) {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+  //     child: Card(
+  //       color: const Color(0xFFD7D7D7),
+  //       child: Padding(
+  //         padding: const EdgeInsets.all(12),
+  //         child: Text(
+  //           review,
+  //           style: const TextStyle(
+  //             color: Color.fromARGB(255, 0, 0, 0),
+  //             fontFamily: 'Rajdhani',
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 }

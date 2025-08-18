@@ -19,7 +19,7 @@ class CartPage extends StatelessWidget {
         itemBuilder: (_, index){
           final item = cart.cartItems[index];
           return ListTile(
-            leading: Image.asset(item.image),
+            leading: Image.network(item.images[0]),
             title: Text(item.name),
             subtitle: Text(item.price.toString()),
             trailing: IconButton(

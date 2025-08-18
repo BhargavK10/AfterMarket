@@ -1,5 +1,4 @@
 import 'package:aftermarket/drawermenu.dart';
-import 'package:aftermarket/performanceproducts.dart';
 import 'package:aftermarket/screens/product_page.dart';
 import 'package:aftermarket/titlebar.dart';
 import 'package:aftermarket/toppicksslider.dart';
@@ -175,17 +174,17 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Column(
                       children: [
-                        categoryButton(Icon(Icons.build, color: Colors.white,), 'Performance', PerformanceProducts()),
+                        categoryButton(Icon(Icons.build, color: Colors.white,), 'Performance', ProductPage(category: "performance")),
                         SizedBox(height: 10),
-                        categoryButton(Icon(Icons.shopping_bag, color: Colors.white,), 'OEM', PerformanceProducts()),
+                        categoryButton(Icon(Icons.shopping_bag, color: Colors.white,), 'OEM', ProductPage(category: "oem")),
                       ],
                     ),
                     SizedBox(width: MediaQuery.of(context).size.width * 0.02),
                     Column(
                       children: [
-                        categoryButton(Icon(Icons.auto_awesome, color: Colors.white,), 'Asthetic', ProductPage()),
+                        categoryButton(Icon(Icons.auto_awesome, color: Colors.white,), 'Asthetic', ProductPage(category: "asthetic",)),
                         SizedBox(height: 10),
-                        categoryButton(Icon(Icons.car_repair, color: Colors.white,), 'Body Kits', PerformanceProducts()),
+                        categoryButton(Icon(Icons.car_repair, color: Colors.white,), 'Body Kits', ProductPage(category: "bodykits")),
                       ],
                     ),
                   ],
