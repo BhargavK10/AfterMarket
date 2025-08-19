@@ -13,6 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  TextEditingController _searchController = TextEditingController();
 
   Container carCard(String image, String name, String mods) {
     return Container(
@@ -122,7 +123,7 @@ class _HomePageState extends State<HomePage> {
               Container(
                 margin: EdgeInsets.all(10),
                 child: TextField(
-                  obscureText: false,
+                  controller: _searchController,
                   style: const TextStyle(color: Colors.black),
                   cursorColor: const Color(0xFFDB3939),
                   decoration: InputDecoration(
@@ -140,6 +141,15 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
+                  onSubmitted: (value) {
+                    // Navigate to product page with search text
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductPage(searchText: value,),
+                      ),
+                    );
+                  },
                 ),
               ),
               // search ^
