@@ -1,6 +1,6 @@
 # aftermarket
 
-A new Flutter project.
+Example project developed during Internship in Flutter App Development at "Platominds"
 
 ## Getting Started
 
