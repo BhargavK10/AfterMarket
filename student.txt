@@ -1,0 +1,170 @@
+
+# Student Record Management System Using Linked List
+
+class Node:
+    def __init__(self, roll, name, marks):
+        self.roll = roll
+        self.name = name
+        self.marks = marks
+        self.next = None
+
+
+class StudentList:
+    def __init__(self):
+        self.head = None
+
+    # Add Student
+    def add(self, roll, name, marks):
+        new_node = Node(roll, name, marks)
+
+        if self.head is None:
+            self.head = new_node
+        else:
+            temp = self.head
+            while temp.next:
+                temp = temp.next
+            temp.next = new_node
+
+        print("Student added successfully!")
+
+    # Display Students
+    def display(self):
+        if self.head is None:
+            print("No records found!")
+            return
+
+        temp = self.head
+
+        print("\nRoll No\tName\tMarks")
+        while temp:
+            print(temp.roll, "\t", temp.name, "\t", temp.marks)
+            temp = temp.next
+
+    # Delete Student
+    def delete(self, roll):
+        temp = self.head
+        prev = None
+
+        while temp:
+            if temp.roll == roll:
+                if prev is None:
+                    self.head = temp.next
+                else:
+                    prev.next = temp.next
+
+                print("Student deleted!")
+                return
+
+            prev = temp
+            temp = temp.next
+
+        print("Student not found!")
+
+    # Update Student
+    def update(self, roll):
+        temp = self.head
+
+        while temp:
+            if temp.roll == roll:
+                temp.name = input("Enter new name: ")
+                temp.marks = float(input("Enter new marks: "))
+                print("Student updated!")
+                return
+
+            temp = temp.next
+
+        print("Student not found!")
+
+    # Search Student
+    def search(self, roll):
+        temp = self.head
+
+        while temp:
+            if temp.roll == roll:
+                print("Student Found!")
+                print("Roll No:", temp.roll)
+                print("Name:", temp.name)
+                print("Marks:", temp.marks)
+                return
+
+            temp = temp.next
+
+        print("Student not found!")
+
+    # Sort Students
+    def sort(self, key, order):
+        students = []
+        temp = self.head
+
+        while temp:
+            students.append(temp)
+            temp = temp.next
+
+        if key == 1:
+            students.sort(key=lambda x: x.roll, reverse=(order == 2))
+        else:
+            students.sort(key=lambda x: x.marks, reverse=(order == 2))
+
+        for i in range(len(students) - 1):
+            students[i].next = students[i + 1]
+
+        if students:
+            students[-1].next = None
+            self.head = students[0]
+
+        print("Records sorted successfully!")
+
+
+# Main Program
+s = StudentList()
+
+while True:
+    print("\n--- Student Record Management ---")
+    print("1. Add Student")
+    print("2. Delete Student")
+    print("3. Update Student")
+    print("4. Search Student")
+    print("5. Sort Students")
+    print("6. Display Students")
+    print("7. Exit")
+
+    choice = int(input("Enter choice: "))
+
+    if choice == 1:
+        roll = int(input("Enter roll number: "))
+        name = input("Enter name: ")
+        marks = float(input("Enter marks: "))
+        s.add(roll, name, marks)
+
+    elif choice == 2:
+        roll = int(input("Enter roll number: "))
+        s.delete(roll)
+
+    elif choice == 3:
+        roll = int(input("Enter roll number: "))
+        s.update(roll)
+
+    elif choice == 4:
+        roll = int(input("Enter roll number: "))
+        s.search(roll)
+
+    elif choice == 5:
+        print("1. Sort by Roll Number")
+        print("2. Sort by Marks")
+        key = int(input("Enter choice: "))
+
+        print("1. Ascending")
+        print("2. Descending")
+        order = int(input("Enter order: "))
+
+        s.sort(key, order)
+
+    elif choice == 6:
+        s.display()
+
+    elif choice == 7:
+        print("Exiting...")
+        break
+
+    else:
+        print("Invalid choice!")
