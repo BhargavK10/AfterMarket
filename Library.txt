@@ -1,0 +1,32 @@
+
+# Library Book Borrowing Records
+
+n = int(input("Enter number of members: "))
+
+borrow = []
+
+for i in range(n):
+    count = int(input("Enter books borrowed by member " + str(i + 1) + ": "))
+    borrow.append(count)
+
+# 1. Calculate average
+total = sum(borrow)
+average = total / n
+print("Average books borrowed:", average)
+
+# 2. Find maximum and minimum borrowings
+print("Highest borrowings:", max(borrow))
+print("Lowest borrowings:", min(borrow))
+
+# 3. Count members who borrowed zero books
+zero_count = borrow.count(0)
+print("Members who borrowed zero books:", zero_count)
+
+# 4. Find mode (most frequent borrow count)
+frequency = {}
+
+for count in borrow:
+    frequency[count] = frequency.get(count, 0) + 1
+
+mode = max(frequency, key=frequency.get)
+print("Most frequently occurring borrow count:", mode)
