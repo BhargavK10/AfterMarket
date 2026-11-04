@@ -1,0 +1,28 @@
+
+# DFS using Adjacency Matrix
+
+n = 6
+
+# A=0, B=1, C=2, D=3, E=4, F=5
+
+graph = [
+    [0, 1, 1, 0, 0, 0],
+    [1, 0, 0, 1, 1, 0],
+    [1, 0, 0, 0, 0, 1],
+    [0, 1, 0, 0, 0, 0],
+    [0, 1, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0]
+]
+
+visited = [False] * n
+
+def dfs(node):
+    print(chr(node + 65), end=" ")
+    visited[node] = True
+
+    for i in range(n):
+        if graph[node][i] == 1 and not visited[i]:
+            dfs(i)
+
+print("DFS Traversal:")
+dfs(0)
