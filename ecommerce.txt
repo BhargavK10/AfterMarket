@@ -1,0 +1,48 @@
+
+# Customer Account ID Search
+
+n = int(input("Enter number of customers: "))
+
+ids = []
+
+for i in range(n):
+    id = int(input("Enter customer ID: "))
+    ids.append(id)
+
+key = int(input("Enter ID to search: "))
+
+# 1. Linear Search
+found = False
+
+for i in range(n):
+    if ids[i] == key:
+        found = True
+        break
+
+if found:
+    print("Linear Search: ID Found")
+else:
+    print("Linear Search: ID Not Found")
+
+# 2. Binary Search
+ids.sort()
+
+low = 0
+high = n - 1
+found = False
+
+while low <= high:
+    mid = (low + high) // 2
+
+    if ids[mid] == key:
+        found = True
+        break
+    elif ids[mid] < key:
+        low = mid + 1
+    else:
+        high = mid - 1
+
+if found:
+    print("Binary Search: ID Found")
+else:
+    print("Binary Search: ID Not Found")
