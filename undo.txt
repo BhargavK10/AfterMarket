@@ -1,0 +1,53 @@
+
+# Undo and Redo System Using Stack
+
+undo_stack = []
+redo_stack = []
+
+document = ""
+
+while True:
+    print("\n--- Text Editor ---")
+    print("1. Make a Change")
+    print("2. Undo")
+    print("3. Redo")
+    print("4. Display Document")
+    print("5. Exit")
+
+    choice = int(input("Enter your choice: "))
+
+    if choice == 1:
+        undo_stack.append(document)
+
+        new_text = input("Enter text to add: ")
+        document = document + new_text
+
+        redo_stack.clear()
+
+        print("Change made successfully!")
+
+    elif choice == 2:
+        if len(undo_stack) > 0:
+            redo_stack.append(document)
+            document = undo_stack.pop()
+            print("Undo successful!")
+        else:
+            print("Nothing to undo!")
+
+    elif choice == 3:
+        if len(redo_stack) > 0:
+            undo_stack.append(document)
+            document = redo_stack.pop()
+            print("Redo successful!")
+        else:
+            print("Nothing to redo!")
+
+    elif choice == 4:
+        print("Current Document:", document)
+
+    elif choice == 5:
+        print("Exiting Text Editor...")
+        break
+
+    else:
+        print("Invalid choice!")
